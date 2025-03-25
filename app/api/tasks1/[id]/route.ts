@@ -2,15 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/utility/db";
 import Task from "@/models/Task";
 
-// Define the type for the params
-interface Params {
-  id: string;
-}
-
-export async function PUT(req: NextRequest, { params }: { params: Params }) {
+export async function PUT(req: NextRequest, { params }: any) {
   await connectDB();
   try {
-    const { id } = params; // Extract the id from params
+    const { id } = params; // TypeScript will infer params as { id: string }
     const { title, description, completed } = await req.json();
     const task = await Task.findByIdAndUpdate(
       id,
@@ -26,7 +21,7 @@ export async function PUT(req: NextRequest, { params }: { params: Params }) {
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: Params }) {
+export async function DELETE(req: NextRequest, { params }: any) {
   await connectDB();
   try {
     const { id } = params;
