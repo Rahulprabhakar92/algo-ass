@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
   try {
     const { title, description } = await req.json();
     if (!title) {
-      return NextResponse.json({ message: "Title is required" }, { status: 400 });
+      return NextResponse.json({ message: "Title is require" }, { status: 400 });
     }
     const task = new Task({ title, description });
     await task.save();
